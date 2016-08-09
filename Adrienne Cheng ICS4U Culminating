@@ -1,0 +1,105 @@
+/**
+ * @(#)Culminating.java
+ * --------------------
+ * ICS4U Culminating Project
+ * --------------------
+ * This velocity equation solver program allows the user to input values for time and distance.
+ * The object's velocity is then calculated and displayed to the user. 
+ * --------------------
+ * @author Adrienne Cheng
+ * June 3, 2015
+ * @version 1.00 2015/6/3
+ */
+
+//packages are imported that contains the JPanel, JButton, etc.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Culminating implements ActionListener {
+    
+    	//frame, panel, label, text field, and buttons are set up
+    	JFrame frame;
+    	JPanel contentPane;
+    	JLabel prompt1, prompt2, velAnswer, img;
+    	JTextField dValue, vValue, tValue;
+    	JButton answerButton;
+        
+    public static void main (String[] args) {
+        Culminating cu = new Culminating();
+    }
+
+    	
+    public Culminating() {
+    	frame = new JFrame("Velocity Solver");
+    	frame.setTitle("Velocity Solver");
+    	//frame is set to exit when the exit button is pressed
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		
+    		
+    	//layout and border for the JPanel is set up
+    	contentPane = new JPanel();
+    	contentPane.setLayout(new GridLayout (4,2));
+    	contentPane.setBackground(Color.WHITE);
+    	contentPane.setBorder(BorderFactory.createEmptyBorder (10, 10, 10,10));
+    		
+    	//prompts the user for the distance 
+    	prompt1 = new JLabel("Enter the (d)istance value: ");
+    	contentPane.add(prompt1);
+    		
+    	dValue = new JTextField(10);
+    	contentPane.add(dValue);
+    		
+    	//prompts the user for the time
+    	prompt2 = new JLabel("Enter the (t)ime value: ");
+    	contentPane.add(prompt2);
+    		
+    	vValue = new JTextField(10);
+    	contentPane.add(vValue);
+    		
+    	//insert an image of the equation into the frame
+    	img = new JLabel(new ImageIcon("velocity formula.png"));
+    	img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+    	img.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+    	contentPane.add(img);
+    		
+    	/*creates and adds button that user can click to find velocity of a certain
+  	 * item based on the (d)istance, and (t)ime values the user has entered
+    	 */
+    	answerButton = new JButton("Answer");
+    	answerButton.setActionCommand("Velocity");
+    	answerButton.addActionListener(this);
+    	contentPane.add(answerButton);
+    		
+    	velAnswer = new JLabel(" ");
+    	contentPane.add(velAnswer);
+    		
+    	frame.setContentPane(contentPane);
+    		
+    	frame.pack();
+    	frame.setVisible(true);
+    		
+    	}	
+    		
+/**
+ * Button click event
+ * pre: none
+ * post: The values of "v", "d", and or "t" have been entered. The velocity
+ * will be displayed.
+ */
+    public void actionPerformed(ActionEvent event) {
+	String eventName = event.getActionCommand();
+				
+	if(eventName.equals ("Velocity")) {
+            double velValue;
+            double g1 = Double.parseDouble(dValue.getText());
+            double g2 = Double.parseDouble(vValue.getText());
+					
+            velValue = g1/g2;
+            velAnswer.setText("    Velocity: "+Double.toString(velValue));	
+	}	 
+    }  	
+			
+   
+}
+    
